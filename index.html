@@ -46,6 +46,50 @@
         .h-full { height: 100%; }
         .relative { position: relative; }
         .absolute { position: absolute; }
+        .top-50p { top: 50%; }
+        .left-50p { left: 50%; }
+        .z-1 { z-index: 1; }
+        .-z-1 { z-index: -1; }
+        .rounded-md { border-radius: 0.375rem; }
+        .rounded-lg { border-radius: 0.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .rounded-full { border-radius: 9999px; }
+        .rounded-t-lg { border-top-left-radius: 0.5rem; border-top-right-radius: 0.5rem; }
+        .rounded-b-lg { border-bottom-left-radius: 0.5rem; border-bottom-right-radius: 0.5rem; }
+        .rounded-tr-lg { border-top-right-radius: 0.5rem; }
+        .rounded-bl-lg { border-bottom-left-radius: 0.5rem; }
+        .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05); }
+        .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 0.15s; }
+        .transition-colors { transition-property: background-color, border-color, color, fill, stroke; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 0.15s; }
+        .ease-in-out { transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); }
+        .duration-200 { transition-duration: 0.2s; }
+        .hover\:bg-gray-700:hover { background-color: #4a5568; }
+        .hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.05); }
+        .outline-none:focus { outline: 0; }
+        .border { border-width: 1px; }
+        .border-2 { border-width: 2px; }
+        .border-red-200 { border-color: #fecaca; }
+        .border-pink-200 { border-color: #fbcfe8; }
+        .bg-white { background-color: #ffffff; }
+        .bg-pink-50 { background-color: #fdf2f8; }
+        .bg-pink-100 { background-color: #fce7f3; }
+        .bg-red-50 { background-color: #fef2f2; }
+        .text-gray-800 { color: #2d3748; }
+        .text-gray-600 { color: #718096; }
+        .text-gray-700 { color: #4a5568; }
+        .text-pink-600 { color: #db2777; }
+        .text-pink-700 { color: #be185d; }
+        .text-red-600 { color: #dc2626; }
+        .text-red-700 { color: #b91c1c; }
+        .text-red-800 { color: #991b1b; }
+        .block { display: block; }
+        .hidden { display: none; }
+        .inline-block { display: inline-block; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
         .cursor-pointer { cursor: pointer; }
         .list-disc { list-style-type: disc; }
         .list-inside { list-style-position: inside; }
@@ -362,24 +406,15 @@
     </div>
 
     <div class="coupon-container hidden" id="main-coupon-app">
-        <!-- Header with Sign Out -->
-        <header class="text-center mb-8 flex justify-between items-center">
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-2">Happy 25th Birthday, My Love!</h1>
-            <button id="signOutButton" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition-colors duration-200 text-sm">Sign Out</button>
-        </header>
-
         <!-- Category Selection View (Initial Page) -->
         <div id="category-selection-view" class="view-section active">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">Happy 25th Birthday, My Love!</h1>
             <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">To celebrate 25 amazing years, and all the incredible ones to come, I've created this special collection of <span class="font-semibold text-pink-600">25 digital coupons</span>, just for you. Select a category below to reveal your gifts!</p>
 
             <div class="text-md text-gray-700 mb-8 bg-pink-100 rounded-lg p-4">
                 <p><strong class="text-pink-700">How to Redeem:</strong> Click on the WhatsApp or Email button next to your desired coupon code. Your request will be sent directly to me!</p>
                 <p class="mt-2"><strong class="text-pink-700">Validity Period:</strong> All coupons are valid from <span class="font-medium">July 12, 2025, to July 12, 2026</span>. You have a whole year to enjoy these!</p>
             </div>
-            <!-- Added User ID display -->
-            <p id="userIdDisplay" class="text-xs text-gray-400 mt-2">
-                Loading user ID...
-            </p>
 
             <div class="category-grid">
                 <button class="category-button" data-target="surprise-date-view">
@@ -645,7 +680,7 @@
                 </div>
             </div>
         </div>
-
+        
         <!-- Funny Terms & Conditions -->
         <div class="mt-12 p-6 bg-red-50 rounded-xl border border-red-200 text-sm text-gray-700 text-left mx-auto max-w-xl">
             <h3 class="text-xl font-bold text-red-700 mb-4 text-center">Terms and Conditions</h3>
@@ -660,10 +695,10 @@
     <script type="module">
         // --- Firebase SDK Imports ---
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
-        // --- Your Firebase Configuration (from your previous message) ---
+        // --- Your Firebase Configuration ---
         const firebaseConfig = {
             apiKey: "AIzaSyATePyvf2FNYf6njDhhfoPTHaEsb9hFNao",
             authDomain: "coupon-book-c7b0c.firebaseapp.com",
@@ -695,13 +730,11 @@
         const authSubmitBtn = document.getElementById('auth-submit-btn');
         const toggleAuthModeBtn = document.getElementById('toggle-auth-mode-btn');
         const mainCouponApp = document.getElementById('main-coupon-app');
-        const signOutButton = document.getElementById('signOutButton');
 
         const categorySelectionView = document.getElementById('category-selection-view');
         const surpriseDateView = document.getElementById('surprise-date-view');
         const attentionView = document.getElementById('attention-view');
         const wildCardView = document.getElementById('wild-card-view');
-        const userIdDisplay = document.getElementById('userIdDisplay');
 
         const categoryButtons = document.querySelectorAll('.category-button');
         const backButtons = document.querySelectorAll('.back-button');
@@ -822,7 +855,7 @@
             }
         }
 
-        // --- Authentication Logic ---
+        // --- Authentication Logic (Email/Password) ---
         let isLoginMode = true; // State to track if form is in login or signup mode
 
         function toggleAuthMode() {
@@ -852,10 +885,10 @@
             try {
                 if (isLoginMode) {
                     await signInWithEmailAndPassword(auth, email, password);
-                    showCustomMessageBox('Success', 'Logged in successfully!');
+                    // No success message box for login, UI transition is enough
                 } else {
                     await createUserWithEmailAndPassword(auth, email, password);
-                    showCustomMessageBox('Success', 'Account created and logged in successfully!');
+                    // No success message box for signup, UI transition is enough
                 }
             } catch (error) {
                 console.error("Authentication error:", error);
@@ -886,28 +919,11 @@
             }
         });
 
-        signOutButton.addEventListener('click', async () => {
-            try {
-                await signOut(auth);
-                showCustomMessageBox('Signed Out', 'You have been signed out.');
-                authView.classList.remove('hidden');
-                mainCouponApp.classList.add('hidden');
-                authEmailInput.value = '';
-                authPasswordInput.value = '';
-                userIdDisplay.innerText = 'Loading user ID...'; // Reset display
-                showView(categorySelectionView); // Reset to initial category view
-            } catch (error) {
-                console.error("Error signing out:", error);
-                showCustomMessageBox('Error', 'Failed to sign out. Please try again.');
-            }
-        });
-
         // Listen for authentication state changes
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 userId = user.uid;
                 console.log("Authenticated with Firebase. User ID:", userId);
-                userIdDisplay.innerText = `Your unique ID: ${userId}`;
                 authView.classList.add('hidden'); // Hide auth form
                 mainCouponApp.classList.remove('hidden'); // Show main app
                 await loadCouponStates(); // Load coupon states for this authenticated user
@@ -915,7 +931,6 @@
                 userId = null; // Clear userId if not authenticated
                 authView.classList.remove('hidden'); // Show auth form
                 mainCouponApp.classList.add('hidden'); // Hide main app
-                userIdDisplay.innerText = 'Please log in.'; // Update display
             }
         });
 
